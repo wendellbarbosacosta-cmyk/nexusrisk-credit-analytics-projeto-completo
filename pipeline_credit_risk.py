@@ -182,10 +182,11 @@ def gerar_dataset_carteira_credito(
         + 0.15 * (limite / renda > 0.8),
     )
     atrasou = rng.random(n_registros) < prob_atraso
+    # Atrasos possíveis cobrem todas as faixas da Res. 2.682 (B a H); 135 dias -> F.
     dias_possiveis = rng.choice(
-        [20, 45, 75, 115, 180, 240],
+        [20, 45, 75, 115, 135, 180, 240],
         size=n_registros,
-        p=[0.2, 0.2, 0.15, 0.25, 0.1, 0.1],
+        p=[0.20, 0.20, 0.15, 0.15, 0.10, 0.10, 0.10],
     )
     dias_atraso = np.where(atrasou, dias_possiveis, 0)
 
