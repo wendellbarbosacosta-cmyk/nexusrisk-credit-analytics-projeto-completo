@@ -1,6 +1,7 @@
 # 💳 NexusRisk: Otimização de Carteira de Crédito PF & Mitigação de Inadimplência D90+
 
-[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![CI](https://github.com/wendellbarbosacosta-cmyk/nexusrisk-credit-analytics-projeto-completo/actions/workflows/ci.yml/badge.svg)](https://github.com/wendellbarbosacosta-cmyk/nexusrisk-credit-analytics-projeto-completo/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![Pandas](https://img.shields.io/badge/Pandas-2.2-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org)
 [![Seaborn](https://img.shields.io/badge/Seaborn-0.13-4C72B0?style=for-the-badge)](https://seaborn.pydata.org)
 [![Plotly](https://img.shields.io/badge/Plotly-5.24-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)](https://plotly.com)
@@ -153,7 +154,7 @@ pip install -r requirements.txt
 python pipeline_credit_risk.py
 ```
 
-Testes: `pip install -r requirements-dev.txt && pytest`.
+Testes: `pip install -r requirements-dev.txt && pytest`. O CI (GitHub Actions) valida Python 3.10 a 3.13 e o `run_analysis.sh` em Linux; Python 3.14 ainda não é suportado pelas versões fixadas.
 
 Opções: `--n-registros 5000 --semente 7 --sem-graficos --saida-csv saida.csv --dir-graficos graficos`.
 Gráficos (PNG e mapa de calor HTML interativo) são gerados em `graficos/`; o CSV e os gráficos são reproduzíveis e ignorados pelo Git.
