@@ -65,7 +65,7 @@ O Comitê de Risco precisa responder a três perguntas:
 | :--- | :--- |
 | `pipeline_credit_risk.py` | Geração de dados, feature engineering vetorizado, respostas às 3 perguntas, gráficos e exportação |
 | `dataset_carteira_credito_analisada.csv` | Saída do pipeline (1.200 clientes, semente 42); **gerado localmente e não versionado** |
-| `tests/test_pipeline.py` | 53 testes `pytest`: rating/PCLD nos limites de cada faixa, invariantes do dataset, perguntas 1–3 e execução ponta a ponta |
+| `tests/test_pipeline.py` | 54 testes `pytest`: rating/PCLD nos limites de cada faixa, invariantes do dataset, perguntas 1–3 e execução ponta a ponta |
 | `requirements.txt` / `requirements-dev.txt` | Dependências com versões fixadas e validadas / idem + `pytest` |
 | `run_analysis.sh` | Setup do ambiente virtual + execução (Linux/macOS/Git Bash) |
 
@@ -77,7 +77,7 @@ O Comitê de Risco precisa responder a três perguntas:
 | :--- | :---: |
 | Saldo devedor total | R$ 3.029.467,80 |
 | Taxa de default D90+ | 8,25% |
-| PCLD total | R$ 184.711,64 |
+| PCLD total | R$ 196.997,33 |
 | Score médio | 650 |
 | DTI médio | 0,74x renda |
 
@@ -85,12 +85,12 @@ O Comitê de Risco precisa responder a três perguntas:
 
 | Canal | Clientes | Default D90+ | PCLD |
 | :--- | :---: | :---: | :---: |
-| **Parcerias & Afiliados** | 275 | **17,45%** | R$ 96.027 |
-| Tráfego Pago | 405 | 6,42% | R$ 57.714 |
-| Orgânico | 338 | 5,33% | R$ 20.549 |
-| Member-get-Member | 182 | 3,85% | R$ 10.421 |
+| **Parcerias & Afiliados** | 275 | **17,45%** | R$ 104.588 |
+| Tráfego Pago | 405 | 6,42% | R$ 58.855 |
+| Orgânico | 338 | 5,33% | R$ 21.753 |
+| Member-get-Member | 182 | 3,85% | R$ 11.801 |
 
-* **Constatação:** Afiliados são 30% do saldo, mas **48% dos inadimplentes D90+** (48 de 99) e **52% da PCLD**. O default é 4,5x o do canal Member-get-Member.
+* **Constatação:** Afiliados são 30% do saldo, mas **48% dos inadimplentes D90+** (48 de 99) e **53% da PCLD**. O default é 4,5x o do canal Member-get-Member.
 * **Hipótese de causa raiz:** comissionamento por aprovação (CPA) estimula volume sem qualidade (premissa do cenário; os dados mostram o efeito, não a causa).
 * **Ação recomendada:** comissionar afiliados com *chargeback* por inadimplência em 90 dias e limitar o limite inicial do canal.
 
@@ -137,7 +137,6 @@ Premissas estilizadas (parametrizáveis em `CenarioReguaPreventiva`): rolagem pa
 
 - [ ] **Modelo preditivo de default:** LightGBM/XGBoost para estimar P(Default) na esteira de concessão.
 - [ ] **Explicabilidade com SHAP:** transparência regulatória e contrapropostas de limite.
-- [ ] **Cobertura de dados:** o gerador sintético não produz atrasos de 121–150 dias, então o rating F nunca aparece na amostra (a regra é coberta pelos testes).
 - [ ] **Microserviço FastAPI** conteinerizado em Docker.
 - [ ] **Testes A/B de política:** Champion/Challenger em 5% da base.
 

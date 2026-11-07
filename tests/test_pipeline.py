@@ -91,6 +91,10 @@ def test_invariantes_do_dataset(carteira):
     assert (carteira["dias_atraso"] >= 0).all()
 
 
+def test_amostra_padrao_exercita_todos_os_ratings(carteira):
+    assert set(carteira["rating_bacen"].astype(str)) == set(pcr.ORDEM_RATING)
+
+
 def test_flag_d90_e_status_sao_consistentes(carteira):
     d90 = carteira["status_cobranca"] == "Inadimplente (D90+)"
     assert (carteira["flag_d90"] == 1).equals(d90)
