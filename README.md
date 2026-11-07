@@ -65,7 +65,8 @@ O Comitê de Risco precisa responder a três perguntas:
 | :--- | :--- |
 | `pipeline_credit_risk.py` | Geração de dados, feature engineering vetorizado, respostas às 3 perguntas, gráficos e exportação |
 | `dataset_carteira_credito_analisada.csv` | Saída do pipeline (1.200 clientes, semente 42); **gerado localmente e não versionado** |
-| `requirements.txt` | Dependências com versões fixadas e validadas |
+| `tests/test_pipeline.py` | 53 testes `pytest`: rating/PCLD nos limites de cada faixa, invariantes do dataset, perguntas 1–3 e execução ponta a ponta |
+| `requirements.txt` / `requirements-dev.txt` | Dependências com versões fixadas e validadas / idem + `pytest` |
 | `run_analysis.sh` | Setup do ambiente virtual + execução (Linux/macOS/Git Bash) |
 
 ---
@@ -136,7 +137,7 @@ Premissas estilizadas (parametrizáveis em `CenarioReguaPreventiva`): rolagem pa
 
 - [ ] **Modelo preditivo de default:** LightGBM/XGBoost para estimar P(Default) na esteira de concessão.
 - [ ] **Explicabilidade com SHAP:** transparência regulatória e contrapropostas de limite.
-- [ ] **Testes unitários** das regras de rating/PCLD (`pytest`).
+- [ ] **Cobertura de dados:** o gerador sintético não produz atrasos de 121–150 dias, então o rating F nunca aparece na amostra (a regra é coberta pelos testes).
 - [ ] **Microserviço FastAPI** conteinerizado em Docker.
 - [ ] **Testes A/B de política:** Champion/Challenger em 5% da base.
 
@@ -152,6 +153,8 @@ source .venv/bin/activate        # Windows (PowerShell): .venv\Scripts\Activate.
 pip install -r requirements.txt
 python pipeline_credit_risk.py
 ```
+
+Testes: `pip install -r requirements-dev.txt && pytest`.
 
 Opções: `--n-registros 5000 --semente 7 --sem-graficos --saida-csv saida.csv --dir-graficos graficos`.
 Gráficos (PNG e mapa de calor HTML interativo) são gerados em `graficos/`; o CSV e os gráficos são reproduzíveis e ignorados pelo Git.
